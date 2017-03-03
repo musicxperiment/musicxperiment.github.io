@@ -1,162 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<!-- <link rel="stylesheet" type="text/css" href="style/style-monochrome.css"> -->
+	<link href="https://fonts.googleapis.com/css?family=Cardo:400,400i,700|Pathway+Gothic+One" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="style/vegas.min.css">
 	<link rel="stylesheet" type="text/css" href="style/custom.css">
 </head>
 
 <body>
-	<div id="container"></div>
-	<h1>Coming Soon</h1>
-	<p>I'm hosted with GitHub Pages.</p>
+	<div></div>
+	<div id="container" class="container>
+		<div class="row">
+			<div class="col-md-12 coming-soon-header">
+				<h1>Coming <span class="yellow">Soon</span></h1>
+				<p>musicxperiment.github.io</p>
+			</div>
+			<div class="col-md-12 coming-soon-footer">
+				<p>I'm hosted with GitHub Pages. Made by <strong>Rudy Hui</strong>.</p>
+			</div>
+		</div>
+	</div>
 </body>
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="script/sketch.js"></script>
+<script src="script/typed.min.js"></script>
+<script src="script/vegas.min.js"></script>
 
 <script type="text/javascript">
-	// ----------------------------------------
-	// Particle
-	// ----------------------------------------
+	$(function(){
+		$(".coming-soon-header h1").typed({
+			strings: ["Coming <span class='yellow'>Soon</span>"],
+			contentType: 'html',
+			loop: true,
+			typeSpeed: 0,
+			backDelay: 8000,
+			showCursor: false
+		});
 
-	function Particle( x, y, radius ) {
-		this.init( x, y, radius );
-	}
+		$("body").vegas({
+			overlay: "images/overlays/07.png",
+			animation: "random",
+			slides: [
+				{ src: "images/slide1.jpg" },
+				{ src: "images/slide2.jpg" },
+				{ src: "images/slide3.jpg" },
+				{ src: "images/slide4.jpg" },
+				{ src: "images/slide5.jpg" }
+			]
+		});
 
-	Particle.prototype = {
+		// ----------------------------------------
+		// Particle
+		// ----------------------------------------
 
-		init: function( x, y, radius ) {
-
-			this.alive = true;
-
-			this.radius = radius || 10;
-			this.wander = 0.15;
-			this.theta = random( TWO_PI );
-			this.drag = 0.92;
-			this.color = '#000000';
-
-			this.x = x || 0.0;
-			this.y = y || 0.0;
-
-			this.vx = 0.0;
-			this.vy = 0.0;
-		},
-
-		move: function() {
-
-			this.x += this.vx;
-			this.y += this.vy;
-
-			this.vx *= this.drag;
-			this.vy *= this.drag;
-
-			this.theta += random( -0.5, 0.5 ) * this.wander;
-			this.vx += sin( this.theta ) * 0.1;
-			this.vy += cos( this.theta ) * 0.1;
-
-			this.radius *= 0.96;
-			this.alive = this.radius > 0.5;
-		},
-
-		draw: function( ctx ) {
-
-			ctx.beginPath();
-			ctx.arc( this.x, this.y, this.radius, 0, TWO_PI, false);
-			ctx.fillStyle = this.color;
-			// ctx.fillStyle = "#000000";
-			ctx.fill();
+		function Particle( x, y, radius ) {
+			this.init( x, y, radius );
 		}
-	};
 
-	// ----------------------------------------
-	// Example
-	// ----------------------------------------
+		Particle.prototype = {
 
-	var MAX_PARTICLES = 180;
-	var COLOURS = [ '#69D2E7', '#A7DBD8', '#20FC8F', '#F38630', '#FA6900', '#FF4E50', '#009DDC' ];
+			init: function( x, y, radius ) {
 
-	var particles = [];
-	var pool = [];
+				this.alive = true;
 
-	var demo = Sketch.create({
-		container: document.getElementById( 'container' ),
-		retina: 'auto'
-	});
+				this.radius = radius || 10;
+				this.wander = 0.15;
+				this.theta = random( TWO_PI );
+				this.drag = 0.92;
+				this.color = '#000000';
 
-	demo.setup = function() {
+				this.x = x || 0.0;
+				this.y = y || 0.0;
 
-	// Set off some initial particles.
-		var i, x, y;
+				this.vx = 0.0;
+				this.vy = 0.0;
+			},
 
-		for ( i = 0; i < 20; i++ ) {
-			x = ( demo.width * 0.5 ) + random( -100, 100 );
-			y = ( demo.height * 0.5 ) + random( -100, 100 );
-			demo.spawn( x, y );
-		}
-	};
+			move: function() {
 
-	demo.spawn = function( x, y ) {
+				this.x += this.vx;
+				this.y += this.vy;
 
-		var particle, theta, force;
+				this.vx *= this.drag;
+				this.vy *= this.drag;
 
-		if ( particles.length >= MAX_PARTICLES )
-		pool.push( particles.shift() );
+				this.theta += random( -0.5, 0.5 ) * this.wander;
+				this.vx += sin( this.theta ) * 0.1;
+				this.vy += cos( this.theta ) * 0.1;
 
-		particle = pool.length ? pool.pop() : new Particle();
-		particle.init( x, y, random( 5, 40 ) );
+				this.radius *= 0.96;
+				this.alive = this.radius > 0.5;
+			},
 
-		particle.wander = random( 0.5, 2.0 );
-		particle.color = random( COLOURS );
-		particle.drag = random( 0.9, 0.99 );
+			draw: function( ctx ) {
 
-		theta = random( TWO_PI );
-		force = random( 2, 8 );
-
-		particle.vx = sin( theta ) * force;
-		particle.vy = cos( theta ) * force;
-
-		particles.push( particle );
-	};
-
-	demo.update = function() {
-
-		var i, particle;
-
-		for ( i = particles.length - 1; i >= 0; i-- ) {
-
-			particle = particles[i];
-
-			if ( particle.alive ) particle.move();
-			else pool.push( particles.splice( i, 1 )[0] );
-		}
-	};
-
-	demo.draw = function() {
-
-		demo.globalCompositeOperation  = 'lighter';
-
-		for ( var i = particles.length - 1; i >= 0; i-- ) {
-			particles[i].draw( demo );
-		}
-	};
-
-	demo.mousemove = function() {
-
-		var particle, theta, force, touch, max, i, j, n;
-
-		for ( i = 0, n = demo.touches.length; i < n; i++ ) {
-
-			touch = demo.touches[i], max = random( 1, 4 );
-			for ( j = 0; j < max; j++ ) {
-				demo.spawn( touch.x, touch.y );
+				ctx.beginPath();
+				ctx.arc( this.x, this.y, this.radius, 0, TWO_PI, false);
+				// ctx.fillStyle = this.color;
+				ctx.fillStyle = "#000000";
+				ctx.fill();
 			}
+		};
 
-		}
-	};
+		// ----------------------------------------
+		// Example
+		// ----------------------------------------
+
+		var MAX_PARTICLES = 180;
+		// var COLOURS = [ '#69D2E7', '#A7DBD8', '#20FC8F', '#F38630', '#FA6900', '#FF4E50', '#009DDC' ];
+
+		var particles = [];
+		var pool = [];
+
+		var demo = Sketch.create({
+			container: document.getElementById('container'),
+			retina: 'auto'
+		});
+
+		demo.setup = function() {
+
+		// Set off some initial particles.
+			var i, x, y;
+
+			for ( i = 0; i < 20; i++ ) {
+				x = ( demo.width * 0.5 ) + random( -100, 100 );
+				y = ( demo.height * 0.5 ) + random( -100, 100 );
+				demo.spawn( x, y );
+			}
+		};
+
+		demo.spawn = function( x, y ) {
+
+			var particle, theta, force;
+
+			if ( particles.length >= MAX_PARTICLES )
+			pool.push( particles.shift() );
+
+			particle = pool.length ? pool.pop() : new Particle();
+			particle.init( x, y, random( 5, 40 ) );
+
+			particle.wander = random( 0.5, 2.0 );
+			// particle.color = random( COLOURS );
+			particle.drag = random( 0.9, 0.99 );
+
+			theta = random( TWO_PI );
+			force = random( 2, 8 );
+
+			particle.vx = sin( theta ) * force;
+			particle.vy = cos( theta ) * force;
+
+			particles.push( particle );
+		};
+
+		demo.update = function() {
+
+			var i, particle;
+
+			for ( i = particles.length - 1; i >= 0; i-- ) {
+
+				particle = particles[i];
+
+				if ( particle.alive ) particle.move();
+				else pool.push( particles.splice( i, 1 )[0] );
+			}
+		};
+
+		demo.draw = function() {
+
+			demo.globalCompositeOperation  = 'lighter';
+
+			for ( var i = particles.length - 1; i >= 0; i-- ) {
+				particles[i].draw( demo );
+			}
+		};
+
+		demo.mousemove = function() {
+
+			var particle, theta, force, touch, max, i, j, n;
+
+			for ( i = 0, n = demo.touches.length; i < n; i++ ) {
+
+				touch = demo.touches[i], max = random( 1, 4 );
+				for ( j = 0; j < max; j++ ) {
+					demo.spawn( touch.x, touch.y );
+				}
+
+			}
+		};
+
+		$(document).mousemove(function(e) {
+			max = random( 1, 4 );
+			for ( j = 0; j < max; j++ ) {
+				demo.spawn( e.pageX, e.pageY );
+			}
+		});
+	});
+	
+	
 </script>
 
 </html>

@@ -559,7 +559,18 @@
 
       })();
 
-      ( options.container || doc.body ).appendChild( element );
+      /*****
+      * Edit here - If want to make canvas is the first element
+      *****/
+      if(options.container === null) {
+        (doc.body).insertBefore(element, doc.body.childNodes[0]);
+      } else {
+        (options.container).insertBefore(element, options.container.childNodes[0]);
+      }
+      /*****
+      * END - Edit here
+      *****/
+      // ( options.container || doc.body ).appendChild( element );
 
       return Sketch.augment( context, options );
     },

@@ -1,10 +1,41 @@
+/* GENERAL */
 body {
+	font-family: 'Cardo', serif;
 	text-align: center;
+	color: #222222;
+	/*background-color: #131623;*/
 }
 
-#container {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    /*background-color: #333;*/
+h1, h2, h3 {
+	font-family: 'Pathway Gothic One', sans-serif;
 }
+
+.yellow {
+	color: #FFF200;
+}
+/* END - GENERAL */
+
+/* COMING SOON HEADER */
+.coming-soon-header {
+	padding-top: 12vh;
+}
+
+.coming-soon-header h1 {
+	font-size: 120px;
+	text-transform: uppercase;
+}
+
+.coming-soon-header p {
+	font-size: 50px;
+}
+/* END - COMING SOON HEADER */
+
+/* SKETCH */
+#container canvas.sketch {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+/* END - SKETCH */
