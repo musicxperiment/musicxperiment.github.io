@@ -101,9 +101,24 @@
 
 				ctx.beginPath();
 				ctx.arc( this.x, this.y, this.radius, 0, TWO_PI, false);
+				// ctx.transform(1,-0.1,0,1,0,0);
 				// ctx.fillStyle = this.color;
 				ctx.fillStyle = "#000000";
 				ctx.fill();
+				// ctx.save();
+
+				ctx.beginPath();
+				ctx.lineWidth = this.radius / 3;
+				ctx.moveTo(this.x + this.radius - this.radius / 3 / 2, this.y);
+				ctx.lineTo(this.x + this.radius - this.radius / 3 / 2, this.y - this.radius * 3);
+				ctx.stroke();
+				// ctx.save();
+
+				ctx.beginPath();
+				ctx.lineWidth = this.radius;
+				ctx.moveTo(this.x + this.radius - this.radius / 3 / 2, this.y - this.radius * 3 + this.radius / 2);
+				ctx.lineTo(this.x + this.radius + this.radius, this.y - this.radius * 2);
+				ctx.stroke();
 			}
 		};
 
@@ -185,7 +200,7 @@
 
 			for ( i = 0, n = demo.touches.length; i < n; i++ ) {
 
-				touch = demo.touches[i], max = random( 1, 4 );
+				touch = demo.touches[i], max = random( 1, 2 );
 				for ( j = 0; j < max; j++ ) {
 					demo.spawn( touch.x, touch.y );
 				}
@@ -194,7 +209,7 @@
 		};
 
 		$(document).mousemove(function(e) {
-			max = random( 1, 4 );
+			max = random( 1, 2 );
 			for ( j = 0; j < max; j++ ) {
 				demo.spawn( e.pageX, e.pageY );
 			}
