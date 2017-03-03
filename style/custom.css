@@ -21,6 +21,7 @@ h1, h2, h3 {
 }
 
 .coming-soon-header h1 {
+	min-height: 132px;
 	font-size: 120px;
 	text-transform: uppercase;
 }
