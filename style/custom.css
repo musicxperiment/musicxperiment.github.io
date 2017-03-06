@@ -1,4 +1,4 @@
-/* GENERAL */
+ GENERAL */
 body {
 	font-family: 'Cardo', serif;
 	text-align: center;
@@ -35,6 +35,12 @@ h1, h2, h3 {
 }
 /* END - COMING SOON HEADER */
 
+/* COMING SOON FOOTER */
+.coming-soon-footer p {
+	padding-top: 18px;
+}
+/* END - COMING SOON FOOTER */
+
 /* SKETCH */
 #container canvas.sketch {
 	position: fixed;
@@ -43,4 +49,4 @@ h1, h2, h3 {
 	width: 100%;
 	height: 100%;
 }
-/* END - SKETCH */
+/* END - SKETCH 
