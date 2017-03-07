@@ -1,0 +1,26 @@
+# Dependencies
+markdown:         kramdown
+highlighter:      pygments
+
+# Permalinks
+permalink:        pretty
+#relative_permalinks: true
+
+# Setup
+title:            MusicXperiment
+tagline:          'Just Do What You Want'
+description:      'Web blog about music, design and web experiment. Made by Rudy Hui.'
+url:              https://musicxperiment.github.io
+baseurl:          /
+
+author:
+  name:           'Rudy Hui'
+  url:            https://musicxperiment.github.io
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:           https://musicxperiment.github.io/
