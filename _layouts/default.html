@@ -20,30 +20,35 @@
 			<nav class="header-nav">
 				<ul class="header-nav-list">
 					<li>
-						<a href="#" class="header-nav-link">
+						<a href="/home/" class="header-nav-link {% if page.url == "/home/" %}is-active{% endif %}">
+							Home
+						</a>
+					</li>
+					<li>
+						<a href="/project/" class="header-nav-link {% if page.url == "/project/" %}is-active{% endif %}">
 							Project
 						</a>
 					</li>
 					<li>
-						<a href="#" class="header-nav-link">
+						<a href="/blog/" class="header-nav-link {% if page.url == "/blog/" %}is-active{% endif %}">
 							Blog
 						</a>
 					</li>
 					<li>
-						<a href="#" class="header-nav-link">
+						<a href="/about/" class="header-nav-link {% if page.url == "/about/" %}is-active{% endif %}">
 							About
 						</a>
 					</li>
 				</ul>
 			</nav>
-			<div class="header-corner header-home">
+			<!-- <div class="header-corner header-home">
 				<button class="md-button md-icon-button header-icon md-button is-active" type="button" title="Home" aria-label="Home">
 					<svg height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
 					    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
 					    <path d="M0 0h24v24H0z" fill="none"></path>
 					</svg>
 				</button>
-			</div>
+			</div> -->
 			<div class="header-corner header-search-button-container">
 				<button class="md-button md-icon-button header-icon header-search-button md-button" type="button" title="Search" aria-label="Search">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
@@ -53,9 +58,77 @@
 			</div>
 		</header>
 
-		<section id=content class="content">
-			{{ content }}
+		<div class="side-drawer">
+			<div class="nav-panel">
+				<header class="nav-panel-header">
+					<div class="header-logo">
+						<meta itemprop="name" content="Music Xperiment">
+						<span class="logo"></span>
+					</div>
+				</header>
+				<nav>
+					<ul class="header-nav-list">
+						<li>
+							<a href="/home/" class="header-nav-link {% if page.url == "/home/" %}is-active{% endif %}">
+								Home
+							</a>
+						</li>
+						<li>
+							<a href="/project/" class="header-nav-link {% if page.url == "/project/" %}is-active{% endif %}">
+								Project
+							</a>
+						</li>
+						<li>
+							<a href="/blog/" class="header-nav-link {% if page.url == "/blog/" %}is-active{% endif %}">
+								Blog
+							</a>
+						</li>
+						<li>
+							<a href="/about/" class="header-nav-link {% if page.url == "/about/" %}is-active{% endif %}">
+								About
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<section id=content class="content outer-container">
+				{{ content }}
 		</section>
+		
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+
+			var header = $("#header");
+			$(window).on('beforeunload', function(){
+				$(this).scrollTop(0);
+			}).on("scroll", function(e) {
+				if (this.scrollY > 0) {
+					header.addClass("body-is-scrolled");
+				} else {
+					header.removeClass("body-is-scrolled");
+				}
+
+			});
+
+			var sidebar = $("div.side-drawer");
+			$(document).on("click", ".header-menu-button", function() {
+				console.log("wew");
+
+				if(sidebar.hasClass("drawer-is-open")) {
+					sidebar.removeClass("drawer-is-open");
+				} else {
+					$("body").prepend("<div class=\"drawer-backdrop\"></div>");
+					sidebar.addClass("drawer-is-open");
+				}
+			});
+
+			$(document).on("click", ".drawer-backdrop", function() {
+				$(".header-menu-button").trigger("click");
+			});
+
+		</script>
 
 	</body>
 </html>
