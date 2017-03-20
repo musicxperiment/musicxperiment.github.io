@@ -13,6 +13,7 @@ gem 'nokogiri', '= 1.6.8.1'
 
 group :jekyll_plugins do
 gem 'github-pages', '>= 93'
+gem 'jekyll-paginate-v2', '~> 1.7', '>= 1.7.4'
 # gem 'jekyll', '>= 3.2'
 # gem 'jekyll-paginate', '>= 1.1.0'
 # gem 'jemoji', '>= 0.7.0'

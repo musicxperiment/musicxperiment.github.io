@@ -1,30 +1,61 @@
 ---
-layout: page
+layout: default
 title: Project
+pagination:
+  enabled: true
+  collection: project
+  sort_reverse: true
+  debug: true
 ---
 
-<p class="message">
-  Hey there! This page is included as an example. Feel free to customize it for your own use upon downloading. Carry on!
-</p>
+<!-- <div class="posts">
+  {% for post in paginator.posts %}
+  <div class="post">
+    <h1 class="post-title">
+      <a href="{{ site.url }}{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h1>
 
-In the novel, *The Strange Case of Dr. Jeykll and Mr. Hyde*, Mr. Poole is Dr. Jekyll's virtuous and loyal butler. Similarly, Poole is an upstanding and effective butler that helps you build Jekyll themes. It's made by [@mdo](https://twitter.com/mdo).
+    <span class="post-date">{{ post.date | date_to_string }}</span>
 
-There are currently two themes built on Poole:
+     {% if post.description.size > 140 %}{{ post.description | markdownify | remove: '<p>' | remove: '</p>' }}{% else %}{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %} <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong>Read more...</strong></a>
+  </div>
+  {% endfor %}
+</div> -->
 
-* [Hyde](http://hyde.getpoole.com)
-* [Lanyon](http://lanyon.getpoole.com)
+<ol class="blog-list posts">
+  {% for post in paginator.posts %}
+    <!-- <li class="post post-{{ post.column }}-column"> -->
+    <li class="post {% cycle 'post-2-column', 'post-1-column is-in-last-column', 'post-1-column', 'post-1-column', 'post-1-column is-in-last-column', 'post-1-column', 'post-1-column', 'post-1-column is-in-last-column' %}">
+    
+      <div class="post">
+        <h1 class="post-title">
+          <a href="{{ site.url }}{{ post.url }}">
+            {{ post.title }}
+          </a>
+        </h1>
 
-Learn more and contribute on [GitHub](https://github.com/poole).
+        <span class="post-date">{{ post.date | date_to_string }}</span>
 
-## Setup
+         {% if post.description.size > 140 %}{{ post.description | markdownify | remove: '<p>' | remove: '</p>' }}{% else %}{{ post.excerpt | markdownify | remove: '<p>' | remove: '</p>' }}{% endif %} <a href="{{ site.url }}{{ post.url }}" title="Read more"><strong>Read more...</strong></a>
+      </div>
+    </li>
 
-Some fun facts about the setup of this project include:
+  {% endfor %}
+</ol>
 
-* Built for [Jekyll](http://jekyllrb.com)
-* Developed on GitHub and hosted for free on [GitHub Pages](https://pages.github.com)
-* Coded with [Sublime Text 2](http://sublimetext.com), an amazing code editor
-* Designed and developed while listening to music like [Blood Bros Trilogy](https://soundcloud.com/maddecent/sets/blood-bros-series)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/poole/issues/new) or [ask me on Twitter](https://twitter.com/mdo).
-
-Thanks for reading!
+{% if paginator.total_pages > 1 %}
+	<div class="pagination">
+		{% if paginator.next_page %}
+			<a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+		{% else %}
+			<span class="pagination-item older">Older</span>
+		{% endif %}
+		{% if paginator.previous_page %}
+			<a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+		{% else %}
+			<span class="pagination-item newer">Newer</span>
+		{% endif %}
+	</div>
+{% endif %}

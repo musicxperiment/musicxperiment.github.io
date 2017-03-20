@@ -1,6 +1,11 @@
 ---
 layout: default
 title: Blog
+pagination:
+  enabled: true
+  collection: blog
+  sort_reverse: true
+  debug: true
 ---
 
 <!-- <div class="posts">
@@ -40,20 +45,17 @@ title: Blog
   {% endfor %}
 </ol>
 
-<div class="pagination">
-  {% if paginator.next_page %}
-    <a class="pagination-item older" href="{{ site.baseurl }}/blog/{{paginator.next_page}}">Older</a>
-  {% else %}
-    <span class="pagination-item older">Older</span>
-  {% endif %}
-  {% if paginator.previous_page %}
-    {% if paginator.page == 2 %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/blog/">Newer</a>
-    {% else %}
-      <a class="pagination-item newer" href="{{ site.baseurl }}/blog/{{paginator.previous_page}}">Newer</a>
-    {% endif %}
-  {% else %}
-    <span class="pagination-item newer">Newer</span>
-  {% endif %}
-</div>
-
+{% if paginator.total_pages > 1 %}
+	<div class="pagination">
+		{% if paginator.next_page %}
+			<a class="pagination-item older" href="{{ paginator.next_page_path | prepend: site.baseurl }}">Older</a>
+		{% else %}
+			<span class="pagination-item older">Older</span>
+		{% endif %}
+		{% if paginator.previous_page %}
+			<a class="pagination-item newer" href="{{ paginator.previous_page_path | prepend: site.baseurl }}">Newer</a>
+		{% else %}
+			<span class="pagination-item newer">Newer</span>
+		{% endif %}
+	</div>
+{% endif %}

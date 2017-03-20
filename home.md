@@ -28,7 +28,7 @@ title: Home
 
 <h1 class="page-title">Blog</h1>
 <ol class="blog-list posts">
-  {% for post in site.posts limit:2 %}
+  {% for post in site.blog reversed limit:2 %}
     <!-- <li class="post post-{{ post.column }}-column"> -->
     <li class="post {% cycle 'post-2-column', 'post-1-column is-in-last-column'  %}">
     
@@ -50,7 +50,7 @@ title: Home
 
 <h1 class="page-title">Project</h1>
 <ol class="blog-list posts">
-  {% for post in site.posts limit:2 %}
+  {% for post in site.project reversed limit:2 %}
     <!-- <li class="post post-{{ post.column }}-column"> -->
     <li class="post {% cycle 'post-2-column', 'post-1-column is-in-last-column'  %}">
     
