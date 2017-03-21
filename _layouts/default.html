@@ -96,8 +96,12 @@
 		<section id=content class="content outer-container">
 				{{ content }}
 		</section>
+
+		{% include footer.html %}
 		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+		<script src="/script/typed.min.js"></script>
+
 		<script type="text/javascript">
 
 			var header = $("#header");
@@ -126,6 +130,17 @@
 
 			$(document).on("click", ".drawer-backdrop", function() {
 				$(".header-menu-button").trigger("click");
+			});
+
+			$(function(){
+				$("footer div.hashtag h2 span.work").typed({
+					strings: ["Music","Design","Website","CSS","JS"],
+					contentType: 'html',
+					loop: true,
+					typeSpeed: 80,
+					backDelay: 2000,
+					showCursor: false
+				});
 			});
 
 		</script>

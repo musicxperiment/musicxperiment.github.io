@@ -1,3 +1,9 @@
+html, body {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+}
+
 body {
 	font-family: 'Roboto', sans-serif;
 }
@@ -7,8 +13,20 @@ h1, h2, h3, h4, h5, h6 {
 	font-weight: bold;
 }
 
+h3.page-title {
+	/*text-transform: uppercase;*/
+}
+
+h3.page-title a:hover {
+	text-decoration: none;
+}
+
 a {
 	color: #87CEEB;
+}
+
+a strong {
+	font-size: 0.8em;
 }
 
 .outer-container {
@@ -16,7 +34,6 @@ a {
 	margin-left: auto;
 	margin-right: auto;
 }
-
 
 /* HEADER */
 header {
@@ -304,8 +321,56 @@ ol.blog-list li.is-in-last-column {
 }
 
 li.post {
-    cursor: pointer;
+    /*cursor: pointer;*/
     margin-bottom: 56px;
     outline: 0;
 }
 /* END - CONTENT */
+
+/* FOOTER */
+footer {
+	background-color: rgba(0,0,0,0.8);
+	text-align: center;
+	color: #ffffff;
+}
+
+footer div {
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+footer div.hashtag {
+	padding-top: 18px;
+	padding-bottom: 18px;
+}
+
+footer div.hashtag h2 {
+	color: #ffffff;
+}
+
+footer div.hashtag h2 span.symbol {
+	font-weight: 400;
+	color: #87CEEB;
+}
+
+footer div div.social-links {
+	padding: 10px 0 2px;
+	border-top: 1px solid rgba(255,255,255,.1);
+	font-size: 14px;
+}
+
+footer div div.social-links a {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+footer p.made-by-me {
+	margin-bottom: 0;
+	padding-bottom: 10px;
+	font-size: 14px;
+}
+
+footer p.made-by-me strong {
+	color: #ffffff;
+}
+/* END - FOOTER */

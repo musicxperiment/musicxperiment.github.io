@@ -3,6 +3,8 @@ layout: post
 title: BLOG - Introducing Lanyon
 description: Test description introducing lanyon
 authorName: Author A
+author:
+  name: AuthorName
 column: 3
 ---
 
