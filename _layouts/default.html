@@ -4,7 +4,7 @@
 	{% include head.html %}
 
 	<body>
-		
+		<div class="drawer-backdrop opaque"></div>
 		<header id="header" class="header">
 			<div class="header-corner">
 				<button class="md-button md-icon-button header-icon header-menu-button md-button" type="button" aria-label="Open navigation drawer">
@@ -20,22 +20,22 @@
 			<nav class="header-nav">
 				<ul class="header-nav-list">
 					<li>
-						<a href="/home/" class="header-nav-link {% if page.url == "/home/" %}is-active{% endif %}">
+						<a href="/home/" class="header-nav-link {% if page.dir == "/home/" %}is-active{% endif %}">
 							Home
 						</a>
 					</li>
 					<li>
-						<a href="/project/" class="header-nav-link {% if page.url == "/project/" %}is-active{% endif %}">
+						<a href="/project/" class="header-nav-link {% if page.dir == "/project/" %}is-active{% endif %}">
 							Project
 						</a>
 					</li>
 					<li>
-						<a href="/blog/" class="header-nav-link {% if page.url == "/blog/" %}is-active{% endif %}">
+						<a href="/blog/" class="header-nav-link {% if page.dir == "/blog/" %}is-active{% endif %}">
 							Blog
 						</a>
 					</li>
 					<li>
-						<a href="/about/" class="header-nav-link {% if page.url == "/about/" %}is-active{% endif %}">
+						<a href="/about/" class="header-nav-link {% if page.dir == "/about/" %}is-active{% endif %}">
 							About
 						</a>
 					</li>
@@ -69,22 +69,22 @@
 				<nav>
 					<ul class="header-nav-list">
 						<li>
-							<a href="/home/" class="header-nav-link {% if page.url == "/home/" %}is-active{% endif %}">
+							<a href="/home/" class="header-nav-link {% if page.dir == "/home/" %}is-active{% endif %}">
 								Home
 							</a>
 						</li>
 						<li>
-							<a href="/project/" class="header-nav-link {% if page.url == "/project/" %}is-active{% endif %}">
+							<a href="/project/" class="header-nav-link {% if page.dir == "/project/" %}is-active{% endif %}">
 								Project
 							</a>
 						</li>
 						<li>
-							<a href="/blog/" class="header-nav-link {% if page.url == "/blog/" %}is-active{% endif %}">
+							<a href="/blog/" class="header-nav-link {% if page.dir == "/blog/" %}is-active{% endif %}">
 								Blog
 							</a>
 						</li>
 						<li>
-							<a href="/about/" class="header-nav-link {% if page.url == "/about/" %}is-active{% endif %}">
+							<a href="/about/" class="header-nav-link {% if page.dir == "/about/" %}is-active{% endif %}">
 								About
 							</a>
 						</li>
@@ -94,7 +94,7 @@
 		</div>
 
 		<section id=content class="content outer-container">
-				{{ content }}
+			{{ content }}
 		</section>
 
 		{% include footer.html %}
@@ -118,12 +118,11 @@
 
 			var sidebar = $("div.side-drawer");
 			$(document).on("click", ".header-menu-button", function() {
-				console.log("wew");
-
 				if(sidebar.hasClass("drawer-is-open")) {
+					$("body div.drawer-backdrop").hide();
 					sidebar.removeClass("drawer-is-open");
 				} else {
-					$("body").prepend("<div class=\"drawer-backdrop\"></div>");
+					$("body div.drawer-backdrop").show();
 					sidebar.addClass("drawer-is-open");
 				}
 			});

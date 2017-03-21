@@ -27,7 +27,7 @@ pagination:
 <ol class="blog-list posts">
   {% for post in paginator.posts %}
     <!-- <li class="post post-{{ post.column }}-column"> -->
-    <li class="post {% cycle 'post-2-column', 'post-1-column is-in-last-column', 'post-1-column', 'post-1-column', 'post-1-column is-in-last-column', 'post-1-column', 'post-1-column', 'post-1-column is-in-last-column' %}">
+    <li class="post {% cycle 'post-2-column', 'post-1-column is-in-last-column', 'post-1-column', 'post-1-column is-in-last-column-if-1024', 'post-1-column is-in-last-column is-not-last-column-if-1024', 'post-1-column is-in-last-column-if-1024', 'post-1-column', 'post-1-column is-in-last-column' %}">
     
       <div class="post">
         <h1 class="post-title">
