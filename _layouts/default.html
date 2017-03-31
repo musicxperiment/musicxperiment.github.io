@@ -97,13 +97,45 @@
 			{{ content }}
 		</section>
 
+		{% include search.html %}
+
 		{% include footer.html %}
 		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 		<script src="/script/typed.min.js"></script>
+		<script src="/script/lunr.min.js"></script>
 
 		<script type="text/javascript">
 
+			window.store = {
+				{% for post in site.blog %}
+					"{{ post.url | slugify }}": {
+						"title": "{{ post.title | xml_escape }}",
+						"author": "{{ post.author | xml_escape }}",
+						"category": "{{ post.category | xml_escape }}",
+						"content": {{ post.content | strip_html | strip_newlines | jsonify }},
+						"url": "{{ post.url | xml_escape }}"
+					}
+					{% unless forloop.last %},{% endunless %}
+				{% endfor %}
+			};
+
+			var projects = {
+				{% for post in site.project %}
+					"{{ post.url | slugify }}": {
+						"title": "{{ post.title | xml_escape }}",
+						"author": "{{ post.author | xml_escape }}",
+						"category": "{{ post.category | xml_escape }}",
+						"content": {{ post.content | strip_html | strip_newlines | jsonify }},
+						"url": "{{ post.url | xml_escape }}"
+					}
+					{% unless forloop.last %},{% endunless %}
+				{% endfor %}
+			};
+
+			$.extend(window.store, projects);
+
+			// ALWAYS START FROM TOP AFTER LOAD
 			var header = $("#header");
 			$(window).on('beforeunload', function(){
 				$(this).scrollTop(0);
@@ -116,6 +148,7 @@
 
 			});
 
+			// SIDE DRAWER
 			var sidebar = $("div.side-drawer");
 			$(document).on("click", ".header-menu-button", function() {
 				if(sidebar.hasClass("drawer-is-open")) {
@@ -131,7 +164,53 @@
 				$(".header-menu-button").trigger("click");
 			});
 
+			// SEARCH WAVE
+			$(document).on("click", ".header-search-button", function() {
+				$("section#search").addClass("lets-go");
+				$("section#search input#bigsearch").focus();
+				$("html").css("overflow", "hidden");
+			});
+
+			$(document).on("click", ".header-close-button", function() {
+				if($("section#search").hasClass("lets-go")) {
+					$("section#search").removeClass("lets-go");
+					$("html").css("overflow", "visible");
+				}
+			});
+
+			// SEARCH
+			$(document).on("keyup", "#bigsearch", function(e) {
+				console.log($("#bigsearch").val());
+
+				var searchTerm = $("#bigsearch").val();
+				if (searchTerm) {
+					// Initalize lunr with the fields it will be searching on. I've given title
+					// a boost of 10 to indicate matches on this field are more important.
+					var idx = lunr(function () {
+						this.field('id');
+						this.field('title', { boost: 10 });
+						this.field('author');
+						this.field('category');
+						this.field('content');
+					});
+
+					for (var key in window.store) { // Add the data to lunr
+						idx.add({
+							'id': key,
+							'title': window.store[key].title,
+							'author': window.store[key].author,
+							'category': window.store[key].category,
+							'content': window.store[key].content
+						});
+
+						var results = idx.search(searchTerm); // Get lunr to perform a search
+						displaySearchResults(results, window.store); // We'll write this in the next section
+					}
+				}
+			});
+
 			$(function(){
+				// FOOTER TYPING
 				$("footer div.hashtag h2 span.work").typed({
 					strings: ["Music","Design","Website","CSS","JS"],
 					contentType: 'html',
@@ -141,6 +220,24 @@
 					showCursor: false
 				});
 			});
+
+			function displaySearchResults(results, store) {
+				var searchResults = $("div.resultsearch ol.blog-list.posts");
+
+				if (results.length) { // Are there any results?
+					var appendString = '';
+
+					for (var i = 0; i < results.length; i++) {  // Iterate over the results
+						var item = store[results[i].ref];
+						appendString += '<li class="post post-3-column"><a href="' + item.url + '"><h3>' + item.title + '</h3></a>';
+						appendString += '<p>' + item.content.substring(0, 150) + '...</p></li>';
+					}
+
+					searchResults.html(appendString);
+				} else {
+					searchResults.html('<li class="post post-3-column">No results found</li>');
+				}
+			}
 
 		</script>
 
