@@ -98,15 +98,12 @@
 		</section>
 
 		{% include footer.html %}
-
-		{% include search.html %}
 		
 		<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 		<script src="/script/typed.min.js"></script>
 
 		<script type="text/javascript">
 
-			// ALWAYS START FROM TOP AFTER LOAD
 			var header = $("#header");
 			$(window).on('beforeunload', function(){
 				$(this).scrollTop(0);
@@ -119,7 +116,6 @@
 
 			});
 
-			// SIDE DRAWER
 			var sidebar = $("div.side-drawer");
 			$(document).on("click", ".header-menu-button", function() {
 				if(sidebar.hasClass("drawer-is-open")) {
@@ -135,20 +131,7 @@
 				$(".header-menu-button").trigger("click");
 			});
 
-			// SEARCH WAVE
-			$(document).on("click", ".header-search-button", function() {
-				$("section#search").addClass("lets-go");
-				$("section#search input#bigsearch").focus();
-			});
-
-			$(document).on("click", ".header-close-button", function() {
-				if($("section#search").hasClass("lets-go")) {
-					$("section#search").removeClass("lets-go");
-				}
-			});
-
 			$(function(){
-				// FOOTER TYPING
 				$("footer div.hashtag h2 span.work").typed({
 					strings: ["Music","Design","Website","CSS","JS"],
 					contentType: 'html',
